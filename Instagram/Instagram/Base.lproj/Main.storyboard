@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,36 +55,58 @@
                     <connections>
                         <outlet property="passwordField" destination="J7w-ok-eMd" id="bbQ-BD-25c"/>
                         <outlet property="usernameField" destination="dic-JW-XfM" id="nYJ-gS-Axq"/>
-                        <segue destination="bMb-Mj-DFf" kind="presentation" identifier="loginSegue" id="wLa-Z5-L9j"/>
+                        <segue destination="bMb-Mj-DFf" kind="show" identifier="loginSegue" id="SHL-3n-fuh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-471" y="134"/>
         </scene>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="Aj4-yF-xeq">
             <objects>
-                <viewController id="bMb-Mj-DFf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="bMb-Mj-DFf" customClass="HomeViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2lu-uS-yrH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyY-5M-FYb">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHa-as-TAM">
+                                <rect key="frame" x="15" y="10" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="onLogout:" destination="bMb-Mj-DFf" eventType="touchUpInside" id="7Z7-Qk-3a2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sqJ-xp-a1n"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="feed_tab" id="epF-kq-lo7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ont-hz-7vh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878" y="134"/>
+            <point key="canvasLocation" x="900" y="134"/>
+        </scene>
+        <!--Capture-->
+        <scene sceneID="K6k-0M-jgR">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uMh-nX-dLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="MediaPickerViewController" id="rPC-JH-TNh" customClass="MediaPickerViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cCI-UX-HjA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ioz-gE-cLK"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Capture" image="insta_camera_btn" id="esL-hb-FTw"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="900" y="913"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="feed_tab" width="25" height="25"/>
+        <image name="insta_camera_btn" width="25" height="25"/>
+    </resources>
 </document>
