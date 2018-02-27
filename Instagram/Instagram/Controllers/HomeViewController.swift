@@ -25,7 +25,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         feedTableView.dataSource = self
         feedTableView.delegate = self
         feedTableView.rowHeight = UITableViewAutomaticDimension
-        feedTableView.estimatedRowHeight = 120
+        feedTableView.estimatedRowHeight = 1300
+        feedTableView.rowHeight = 400;
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(HomeViewController.didPullToRefresh(_:)), for: .valueChanged)
@@ -45,6 +46,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let query = Post.query()
         query?.limit = 20
         query?.order(byDescending: "_created_at")
+        query?.includeKey("author")
+        query?.includeKey("timestamp")
+        
         // fetch data asynchronously
         query?.findObjectsInBackground(block: { (posts, error) in
             if  posts != nil {
@@ -67,13 +71,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = feedTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
         let post = posts[indexPath.row] as PFObject!
+        
         cell.postCaptionLabel.text = (post!["caption"] as! String)
-        //cell.postUsernameLabel.text = (post!["author"] as! String)
         cell.postImage.file = (post!["media"] as! PFFile)
         cell.postImage.loadInBackground()
         return cell
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(sender != nil) {
+            
+            let cell = sender as! UITableViewCell
+            if let indexPath = feedTableView.indexPath(for: cell) {
+                let post = posts[indexPath.row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.post = post
+                
+                let postCell = sender as! PostCell
+                detailViewController.postImage = postCell.postImage.image
+            }
+        }
+    }
     
     @IBAction func onLogout(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
